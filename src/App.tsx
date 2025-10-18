@@ -1,12 +1,13 @@
-function App() {
+import { RouterProvider } from 'react-router';
+import { router } from './core/routes';
+import { FavoritesProvider } from './core/contexts/favorites/favorites-provider';
 
+function App() {
   return (
-    <>
-     <h1 className="text-3xl font-bold underline">
-    Hello world!
-  </h1>
-    </>
-  )
+    <FavoritesProvider>
+      <RouterProvider router={router} />
+    </FavoritesProvider>
+  );
 }
 
-export default App
+export default App;
