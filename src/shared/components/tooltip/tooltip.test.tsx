@@ -25,15 +25,15 @@ const MockTooltip = ({ title, children }: { title: string; children: React.React
 
 describe('Tooltip', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
-    mockUseTooltip.mockReturnValue({
-      tooltipProps: {
-        onMouseEnter: jest.fn(),
-        onMouseLeave: jest.fn(),
-      },
-      TooltipPortal: () => <div data-testid="tooltip-portal">mock Tooltip</div>,
-    });
+  jest.clearAllMocks();
+  mockUseTooltip.mockReturnValue({
+    tooltipProps: {
+      onMouseEnter: jest.fn(),
+      onMouseLeave: jest.fn(),
+    },
+    TooltipPortal: () => <div data-testid="tooltip-portal">mock Tooltip</div> as any,
   });
+});
 
   test('garante que renderiza tooltip com children e title', () => {
     render(
