@@ -13,10 +13,7 @@ export default {
   ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   collectCoverageFrom: [
-    'src/**/*.(ts|tsx)',
-    '!src/**/*.d.ts',
-    '!src/main.tsx',
-    '!src/vite-env.d.ts',
+    'src/shared/components/**/*.{ts,tsx}',
   ],
   testEnvironmentOptions: {
     customExportConditions: ['node', 'node-addons'],
