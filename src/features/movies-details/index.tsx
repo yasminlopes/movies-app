@@ -12,7 +12,7 @@ import { Image } from '../../shared/components/image';
 import { Badge } from '../../shared/components/badge';
 
 export default function MovieDetailsView() {
-  
+
   const { id }                                      = useParams<{ id: string }>();
   const movieId                                     = Number(id);
   const [movie, setMovie]                           = useState<Movie | null>(null);
