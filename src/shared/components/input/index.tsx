@@ -1,14 +1,15 @@
 import { forwardRef } from 'react'
 import { cn } from '../../utils/cn'
 
-interface Props extends React.ComponentProps<'input'> {
-  variant?: 'default' | 'error' | 'success'
-  size?: 'sm' | 'default' | 'lg'
-  startIcon?: React.ReactNode
-  endIcon?: React.ReactNode
-  label?: string
-  error?: string
-  helper?: string
+interface Props extends Omit<React.ComponentProps<'input'>, 'size'> { 
+  label?: string;
+  error?: string;
+  helper?: string;
+  startIcon?: React.ReactNode;
+  endIcon?: React.ReactNode;
+  variant?: 'default' | 'error' | 'success';
+  size?: 'sm' | 'default' | 'lg'; 
+  className?: string;
 }
 
 export const Input = forwardRef<HTMLInputElement, Props>(({

@@ -18,7 +18,7 @@ export function useTooltip({
 
   const [open, setOpen] = useState(false)
   const [coords, setCoords] = useState({ x: 0, y: 0 })
-  const timeoutRef = useRef<number | undefined>(undefined)
+  const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined) // Mudança aqui
 
   const showTooltip = (e: React.MouseEvent) => {
     const target = e.currentTarget as HTMLElement

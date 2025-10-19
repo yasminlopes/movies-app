@@ -7,14 +7,15 @@ interface Option {
   disabled?: boolean
 }
 
-interface Props extends React.ComponentProps<'select'> {
-  variant?: 'default' | 'error' | 'success'
-  size?: 'sm' | 'default' | 'lg'
-  options: Option[]
-  placeholder?: string
-  label?: string
-  error?: string
-  helper?: string
+interface Props extends Omit<React.ComponentProps<'select'>, 'size'> { 
+  label?: string;
+  options: Option[];
+  placeholder?: string;
+  error?: string;
+  helper?: string;
+  variant?: 'default' | 'error' | 'success';
+  size?: 'sm' | 'default' | 'lg';
+  className?: string;
 }
 
 export const Select = forwardRef<HTMLSelectElement, Props>(({
