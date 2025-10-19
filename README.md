@@ -83,10 +83,18 @@ Crie o arquivo .env conforme o exemplo (env.sample)
 
 ## Testes
 
-O projeto usa Jest + React Testing Library com suporte a TypeScript.
+O projeto usa Jest + React Testing Library com suporte a TypeScript
 
-- Rodar testes com ```npm run test```
-- Rodar cobertura dos testes com ```npm run test:coverage```
+Os testes foram escritos para garantir que os componentes se comportem como o usuário espera, validando:
+
+- Renderização correta de elementos (inputs, botões, cards, ícones)
+
+- Reações a eventos (cliques, digitação, favoritar, busca)
+
+- Interações entre componentes e hooks
+
+Rode os testes com ```npm run test```
+Rode as cobertura dos testes com ```npm run test:coverage```
 
 ---
 
