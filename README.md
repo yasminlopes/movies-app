@@ -1,73 +1,93 @@
-# React + TypeScript + Vite
+# 🎬 Movies DB  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação **React + TypeScript + Vite** para explorar filmes, buscar títulos e adicionar os melhores filmes aos favoritos.
 
-Currently, two official plugins are available:
+O projeto consome a API pública do **The Movie Database (TMDB)** para exibir conteúdos atualizados e populares do cinema.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔗 **Demo:** [yasminlopes-movies-app.vercel.app](https://yasminlopes-movies-app.vercel.app/)
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tecnologias
 
-## Expanding the ESLint configuration
+- **React 19** + **TypeScript**
+- **Vite**
+- **Tailwind CSS**
+- **React Router v7**
+- **Axios**
+- **Context API** (estado global)
+- **Jest + React Testing Library**
+- **Lucide React** (ícones)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Configuraçoes
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. Crie uma conta em [TheMovieDB](https://www.themoviedb.org/)  
+2. Gere sua **API Key** em: [Configurações → API](https://www.themoviedb.org/settings/api)  
+3. Crie um arquivo `.env` na raiz com base no exemplo abaixo:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+```bash
+# .env.sample
+VITE_TMDB_BASE_URL='https://api.themoviedb.org'
+VITE_TMDB_IMAGE_BASE_URL='https://image.tmdb.org/t/p'
+VITE_TMDB_API_KEY='sua_chave_aqui'
+``` 
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Estrutura do Projeto
+
+A arquitetura foi organizada por responsabilidade, separando o núcleo, as funcionalidades e os recursos compartilhados.
+
+
+```bash
+src/
+├── core/        # Núcleo da aplicação
+├── features/    # Funcionalidades principais
+├── shared/      # Recursos reutilizáveis
+``` 
+
+### Core
+
+Tudo que é essencial para o funcionamento da aplicação.
+Contém layouts, rotas e componentes estruturais (ex: Header)
+
+### Features
+
+As funcionalidades principais da aplicação.
+Cada feature representa um módulo do sistema:
+
+- movies/ → página inicial (filmes populares)
+
+- movies-details/ → detalhes do filme
+
+- favorites/ → lista de favoritos
+
+### Shared
+
+Tudo que é compartilhado entre as features:
+componentes genéricos, hooks reutilizáveis, serviços (API), utilitários e tipos globais.
+
+### Como Rodar o Projeto
+
+1. Clonar o repositório
+```bash 
+git clone https://github.com/yasminlopes/movies-app.git
+cd movies-app
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Instalar dependências com ```npm install```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+3. Configurar variáveis de ambiente
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Crie o arquivo .env conforme o exemplo (env.sample)
+
+4. Rodar o servidor de desenvolvimento com ```npm run dev```
+
+## Testes
+
+O projeto usa Jest + React Testing Library com suporte a TypeScript.
+
+- Rodar testes com ```npm run test```
+- Rodar cobertura dos testes com ```npm run test:coverage```
+
+---
+
+Desenvolvido por Yasmin Lopes 💚
