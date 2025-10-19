@@ -3,11 +3,9 @@ import { MemoryRouter } from 'react-router';
 import { jest, describe, test, expect } from '@jest/globals';
 import Header from './header';
 
-// Polyfill para TextEncoder (necessário para react-router)
 global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder;
 
-// mock do hook - definir dentro do mock para evitar erro de escopo
 jest.mock('../../shared/hooks/use-search-route', () => ({
   useSearchRoute: () => ({ 
     value: 'bat', 
@@ -15,7 +13,6 @@ jest.mock('../../shared/hooks/use-search-route', () => ({
   }),
 }));
 
-// simplifica componentes compartilhados que não são foco do teste
 jest.mock('../../shared/components/button', () => ({
   Button: ({ startIcon, ...props }: any) => (
     <button {...props}>
@@ -30,7 +27,17 @@ jest.mock('../../shared/components/tooltip', () => ({
   Tooltip: ({ children }: any) => <>{children}</>,
 }));
 
-// mock dos ícones do lucide-react
+jest.mock('../../shared/components/input', () => ({
+  Input: ({ startIcon, endIcon, className, ...props }: any) => (
+    <div className="relative">
+      {startIcon && <div data-testid="start-icon-wrapper">{startIcon}</div>}
+      <input className={className} {...props} />
+      {endIcon && <div data-testid="end-icon-wrapper">{endIcon}</div>}
+    </div>
+  ),
+}));
+
+
 jest.mock('lucide-react', () => ({
   Clapperboard: () => <div data-testid="clapperboard-icon" />,
   Heart: () => <div data-testid="heart-icon" />,
@@ -45,14 +52,11 @@ describe('Header', () => {
       </MemoryRouter>
     );
 
-    // Link da logo (tem texto "MovieDB")
     expect(screen.getByRole('link', { name: /moviedb/i })).toBeInTheDocument();
 
-    // Input com placeholder
     const input = screen.getByPlaceholderText(/buscar filmes/i);
     expect(input).toBeInTheDocument();
 
-    // Link para /favorites (o botão não tem texto, então checamos pelo href)
     const links = screen.getAllByRole('link');
     const favLink = links.find((l) => l.getAttribute('href') === '/favorites');
     expect(favLink).toBeTruthy();

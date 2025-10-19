@@ -7,16 +7,14 @@ interface Props extends React.ComponentProps<'img'> {
   objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down'
   loading?: 'lazy' | 'eager'
   showPlaceholder?: boolean
-  /** NOVO: classes do container */
   containerClassName?: string
-  /** OPCIONAL: classes específicas da img (em vez de usar className genérico) */
   imageClassName?: string
 }
 
 export const Image = forwardRef<HTMLImageElement, Props>(({
   containerClassName,
   imageClassName,
-  className, // para compat, ainda aplicaremos na img
+  className, 
   src,
   alt = '',
   fallback,
@@ -34,7 +32,7 @@ export const Image = forwardRef<HTMLImageElement, Props>(({
   const aspectRatioClasses = {
     square: 'aspect-square',
     video: 'aspect-video',
-    portrait: 'aspect-[2/3]', // melhor p/ poster
+     portrait: 'aspect-[3/4]',
     auto: '',
   }
 
