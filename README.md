@@ -2,7 +2,7 @@
 
 Aplicação **React + TypeScript + Vite** para explorar filmes, buscar títulos e adicionar os melhores filmes aos favoritos.
 
-<img width="2860" height="3617" alt="image" src="https://github.com/user-attachments/assets/6dd08694-12ef-47ad-99fb-1d14fe829170" />
+<img width="2860" height="3617" alt="image" src="https://github.com/user-attachments/assets/950b5ce6-d403-4d91-aa67-25d25c0bfb7e" />
 
 O projeto consome a API pública do **The Movie Database (TMDB)** para exibir conteúdos atualizados e populares do cinema.
 
