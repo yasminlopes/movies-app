@@ -77,7 +77,6 @@ export default function MovieDetailsView() {
           <Image
             src={getImageUrl(movie.backdrop_path, 'original')!}
             alt={movie.title}
-            fill
             className="object-cover"
             sizes="100vw"
           />
@@ -116,7 +115,6 @@ export default function MovieDetailsView() {
                   getImageUrl(movie.poster_path, 'w500') || '/placeholder.svg'
                 }
                 alt={movie.title}
-                fill
                 className="object-cover"
                 sizes="300px"
               />
