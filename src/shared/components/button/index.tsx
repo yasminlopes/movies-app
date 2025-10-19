@@ -1,5 +1,5 @@
 import { forwardRef } from 'react'
-import { cn } from '../utils/cn'
+import { cn } from '../../utils/cn'
 
 interface Props extends React.ComponentProps<'button'> {
   variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
@@ -57,3 +57,5 @@ export const Button = forwardRef<HTMLButtonElement, Props>(({
     </button>
   )
 })
+
+Button.displayName = 'Button'

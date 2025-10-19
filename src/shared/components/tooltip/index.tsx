@@ -1,5 +1,5 @@
 import { cloneElement, isValidElement, type ReactNode } from 'react';
-import { useTooltip } from "../hooks/use-tooltip";
+import { useTooltip } from "../../hooks/use-tooltip";
 
 interface Props {
   title         : string;
