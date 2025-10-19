@@ -1,43 +1,62 @@
 import { useMemo, useState } from 'react';
 
+type Direction = 'asc' | 'desc';
+
 export function useSorting<T>(data: T[], defaultSort: string = '') {
   const [sortBy, setSortBy] = useState<string>(defaultSort);
 
   const sortedData = useMemo(() => {
     if (!sortBy) return data;
 
-    const sorted = [...data];
-    const [field, direction] = sortBy.split('-');
+    const lastDash = sortBy.lastIndexOf('-');
+    const field = lastDash > -1 ? sortBy.slice(0, lastDash) : sortBy;
+    const direction: Direction =
+      lastDash > -1 ? (sortBy.slice(lastDash + 1) as Direction) : 'asc';
 
-    return sorted.sort((a, b) => {
-      const aValue = getNestedValue(a, field);
-      const bValue = getNestedValue(b, field);
+    const indexed = data.map((item, idx) => ({ item, idx }));
 
-      let comparison = 0;
+    const collator = new Intl.Collator('pt-BR', {
+      numeric: true,
+      sensitivity: 'base', 
+    });
 
-      if (typeof aValue === 'string' && typeof bValue === 'string') {
-        comparison = aValue.localeCompare(bValue);
-      } else if (typeof aValue === 'number' && typeof bValue === 'number') {
-        comparison = aValue - bValue;
-      } else if (aValue instanceof Date && bValue instanceof Date) {
-        comparison = aValue.getTime() - bValue.getTime();
-      } else {
-        comparison = String(aValue).localeCompare(String(bValue));
+    const getVal = (obj: any, path: string): any => {
+      if (!path) return obj;
+      return path.split('.').reduce((cur, key) => (cur == null ? cur : cur[key]), obj);
+    };
+
+    const compare = (a: any, b: any) => {
+      const aU = a == null;
+      const bU = b == null;
+      if (aU && bU) return 0;
+      if (aU) return 1;
+      if (bU) return -1;
+
+      if (a instanceof Date || b instanceof Date) {
+        const aTime = a instanceof Date ? a.getTime() : new Date(a).getTime();
+        const bTime = b instanceof Date ? b.getTime() : new Date(b).getTime();
+        return aTime - bTime;
       }
 
-      return direction === 'desc' ? -comparison : comparison;
+      const aNum = typeof a === 'number' ? a : (isFinite(+a) ? +a : NaN);
+      const bNum = typeof b === 'number' ? b : (isFinite(+b) ? +b : NaN);
+      const bothNumbers = !Number.isNaN(aNum) && !Number.isNaN(bNum);
+      if (bothNumbers) return aNum - bNum;
+
+      return collator.compare(String(a), String(b));
+    };
+
+    indexed.sort((A, B) => {
+      const aVal = getVal(A.item, field);
+      const bVal = getVal(B.item, field);
+      let cmp = compare(aVal, bVal);
+      if (direction === 'desc') cmp = -cmp;
+
+      return cmp || A.idx - B.idx;
     });
+
+    return indexed.map(({ item }) => item);
   }, [data, sortBy]);
 
-  return {
-    sortedData,
-    sortBy,
-    setSortBy,
-  };
-}
-
-function getNestedValue(obj: any, path: string): any {
-  return path.split('.').reduce((current, key) => {
-    return current?.[key];
-  }, obj);
+  return { sortedData, sortBy, setSortBy };
 }

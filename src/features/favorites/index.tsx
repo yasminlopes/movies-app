@@ -9,8 +9,8 @@ import { useSorting } from '../../shared/hooks/use-sorting';
 const FILTERS_OPTIONS = [
   { value: 'title-asc', label: 'Título (A-Z)' },
   { value: 'title-desc', label: 'Título (Z-A)' },
-  { value: 'rating-desc', label: 'Nota (Maior)' },
-  { value: 'rating-asc', label: 'Nota (Menor)' },
+  { value: 'vote_average-desc', label: 'Nota (Maior)' },
+  { value: 'vote_average-asc', label: 'Nota (Menor)' },
 ]
 
 export default function FavoritesView() {
