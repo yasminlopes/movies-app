@@ -109,16 +109,17 @@ export default function MovieDetailsView() {
         <div className="grid md:grid-cols-[300px_1fr] gap-8 items-start">
 
           <div className="hidden md:block">
-            <div className="relative aspect-[2/3] rounded-lg overflow-hidden shadow-2xl ring-1 ring-border">
-              <Image
-                src={
-                  getImageUrl(movie.poster_path, 'w500') || '/placeholder.svg'
-                }
-                alt={movie.title}
-                className="object-cover"
-                sizes="300px"
-              />
-            </div>
+            <div className="relative rounded-lg overflow-hidden shadow-2xl ring-1 ring-border">
+            <Image
+              src={getImageUrl(movie.poster_path, 'w500') || '/placeholder.svg'}
+              alt={movie.title}
+              aspectRatio="portrait"
+              containerClassName="w-full"      
+              imageClassName="object-cover"
+              sizes="300px"
+          />
+          </div>
+
           </div>
 
           <div className="space-y-6">

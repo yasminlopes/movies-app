@@ -7,10 +7,16 @@ interface Props extends React.ComponentProps<'img'> {
   objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down'
   loading?: 'lazy' | 'eager'
   showPlaceholder?: boolean
+  /** NOVO: classes do container */
+  containerClassName?: string
+  /** OPCIONAL: classes específicas da img (em vez de usar className genérico) */
+  imageClassName?: string
 }
 
 export const Image = forwardRef<HTMLImageElement, Props>(({
-  className,
+  containerClassName,
+  imageClassName,
+  className, // para compat, ainda aplicaremos na img
   src,
   alt = '',
   fallback,
@@ -28,7 +34,7 @@ export const Image = forwardRef<HTMLImageElement, Props>(({
   const aspectRatioClasses = {
     square: 'aspect-square',
     video: 'aspect-video',
-    portrait: 'aspect-[3/4]',
+    portrait: 'aspect-[2/3]', // melhor p/ poster
     auto: '',
   }
 
@@ -58,12 +64,7 @@ export const Image = forwardRef<HTMLImageElement, Props>(({
           ref={ref}
           src={fallback}
           alt={alt}
-          className={cn(
-            'block w-full',
-            aspectRatioClasses[aspectRatio],
-            objectFitClasses[objectFit],
-            className
-          )}
+          className={cn('block w-full h-full', objectFitClasses[objectFit], imageClassName, className)}
           {...props}
         />
       );
@@ -72,7 +73,11 @@ export const Image = forwardRef<HTMLImageElement, Props>(({
   }
 
   return (
-    <div className={cn('relative overflow-hidden', aspectRatioClasses[aspectRatio])}>
+    <div className={cn(
+      'relative overflow-hidden w-full h-full', // <- garante tamanho
+      aspectRatioClasses[aspectRatio],
+      containerClassName
+    )}>
       {isLoading && showPlaceholder && (
         <div className="absolute inset-0 flex items-center justify-center bg-muted animate-pulse">
           <div className="text-muted-foreground text-sm">Carregando...</div>
@@ -87,6 +92,7 @@ export const Image = forwardRef<HTMLImageElement, Props>(({
           'block w-full h-full transition-opacity duration-300',
           objectFitClasses[objectFit],
           isLoading ? 'opacity-0' : 'opacity-100',
+          imageClassName,
           className
         )}
         onError={handleError}
