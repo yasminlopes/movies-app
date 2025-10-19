@@ -94,7 +94,7 @@ describe('Select', () => {
     const user = userEvent.setup();
     const handleChange = jest.fn();
     
-    render(<Select onChange={handleChange} options={mockOptions} />);
+    render(<Select onValueChange={handleChange} options={mockOptions} />);
     
     const select = screen.getByRole('combobox');
     await user.selectOptions(select, 'option1');

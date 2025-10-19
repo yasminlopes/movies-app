@@ -27,8 +27,6 @@ export default function FavoritesView() {
         <EmptyState
           title="Nenhum favorito ainda"
           description="Comece a adicionar filmes aos seus favoritos para vê-los aqui. Explore filmes populares e salve os que você mais gosta!"
-          actionLabel="Explorar Filmes"
-          actionHref="/"
         />
       </div>
     );
