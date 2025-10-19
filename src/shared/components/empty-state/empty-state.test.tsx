@@ -111,7 +111,7 @@ describe('EmptyState', () => {
     render(
       <EmptyState 
         title="Título Grande" 
-        description="descrição grande"
+        description="Descrição grande"
         size="lg" 
       />
     );
